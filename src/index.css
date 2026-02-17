@@ -393,3 +393,43 @@ body {
   display: flex;
   gap: 0.5rem;
 }
+
+/* Reset */
+
+.reset-section {
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #333;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #e74c3c;
+  border-radius: 10px;
+  background: none;
+  color: #e74c3c;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.reset-btn.confirm {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.reset-btn.cancel {
+  border-color: #555;
+  color: #888;
+}
+
+.reset-warning {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.reset-actions {
+  display: flex;
+  gap: 0.5rem;
+}

@@ -68,8 +68,9 @@ export default function Dashboard({ finance, onOpenSettings }) {
               )}
             </div>
             <div className="budget-details">
+              <span>Завтра: ~{finance.tomorrow.toLocaleString('ru-RU')} ₽</span>
               <span>Баланс: {finance.balance.toLocaleString('ru-RU')} ₽</span>
-              <span>До зарплаты: {finance.daysUntilPayday} дн.</span>
+              <span>До ЗП: {finance.daysUntilPayday} дн.</span>
             </div>
           </div>
 

@@ -35,6 +35,12 @@ export function useFinance() {
   // Actual: what's left of today's budget after transactions
   const todayRemaining = anchor + todayNet
 
+  // Tomorrow: daily budget from current (actual) balance, for remaining days minus today
+  const tomorrow = useMemo(
+    () => getDailyBudget(data.balance, daysUntilPayday > 1 ? daysUntilPayday - 1 : daysUntilPayday),
+    [data.balance, daysUntilPayday]
+  )
+
   const adjustBalance = useCallback((amount) => {
     const current = load()
     const nextBalance = current.balance + amount
@@ -74,17 +80,26 @@ export function useFinance() {
     setTodayLog(nextLog)
   }, [])
 
+  const resetAll = useCallback(() => {
+    localStorage.removeItem('cash_compass')
+    localStorage.removeItem('cash_compass_log')
+    setData({ balance: 0, paydays: [] })
+    setTodayLog([])
+  }, [])
+
   return {
     balance: data.balance,
     paydays: data.paydays,
     daysUntilPayday,
     anchor,
     todayRemaining,
+    tomorrow,
     todayNet,
     todayLog,
     adjustBalance,
     adjustBalanceSilent,
     setPaydays,
     setBalance,
+    resetAll,
   }
 }

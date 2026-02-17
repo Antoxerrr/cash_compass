@@ -4,6 +4,7 @@ const DAYS = Array.from({ length: 31 }, (_, i) => i + 1)
 
 export default function Settings({ finance, onClose }) {
   const [balance, setBalance] = useState(String(finance.balance))
+  const [confirmReset, setConfirmReset] = useState(false)
 
   const togglePayday = (day) => {
     const current = finance.paydays
@@ -58,6 +59,26 @@ export default function Settings({ finance, onClose }) {
             Установить
           </button>
         </form>
+      </section>
+
+      <section className="settings-section reset-section">
+        {!confirmReset ? (
+          <button className="reset-btn" onClick={() => setConfirmReset(true)}>
+            Сбросить все данные
+          </button>
+        ) : (
+          <div className="reset-confirm">
+            <p className="reset-warning">Все данные будут удалены. Точно?</p>
+            <div className="reset-actions">
+              <button className="reset-btn confirm" onClick={() => { finance.resetAll(); onClose() }}>
+                Да, удалить
+              </button>
+              <button className="reset-btn cancel" onClick={() => setConfirmReset(false)}>
+                Отмена
+              </button>
+            </div>
+          </div>
+        )}
       </section>
     </div>
   )
