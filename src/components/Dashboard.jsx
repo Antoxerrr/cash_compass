@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const QUICK_AMOUNTS = [100, 500, 1000, 5000]
+const QUICK_AMOUNTS = [1, 10, 50, 500]
 const MODES = { adjust: 'Изменить', past: 'Коррекция', set: 'Установить' }
 
 export default function Dashboard({ finance, onOpenSettings }) {
@@ -17,7 +17,7 @@ export default function Dashboard({ finance, onOpenSettings }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     const num = parseFloat(input)
-    if (isNaN(num)) return
+    if (isNaN(num) || num === 0) return
 
     if (mode === 'set') {
       finance.setBalance(num)
@@ -88,12 +88,11 @@ export default function Dashboard({ finance, onOpenSettings }) {
 
           <form className="input-section" onSubmit={handleSubmit}>
             <input
-              type="number"
+              type="text"
               className="amount-input"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={mode === 'set' ? 'Новый баланс' : mode === 'past' ? 'Сумма (задним числом)' : 'Сумма'}
-              inputMode="numeric"
+              placeholder={mode === 'set' ? 'Новый баланс' : 'Сумма'}
             />
             <button type="submit" className="apply-btn" disabled={!input}>
               {MODES[mode]}
